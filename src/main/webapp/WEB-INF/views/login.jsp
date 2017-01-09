@@ -21,6 +21,8 @@
 <div id="warp">
 	<form id="login"  class="login-page">
 		<div class="title">管理员登录</div>
+		用户名shuidi@163.com
+		密码shuidi
 		<input class="form-control" placeholder="用户名" id="j_username" name="username" size="20" maxlength="50" type="text">
 		<input class="form-control" placeholder="密码" id="j_password" name="password" size="20" maxlength="50" type="password">
 		<p style="color: red;">${message}</p>

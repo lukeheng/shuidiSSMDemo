@@ -3,7 +3,6 @@ package com.controller;
 import com.bean.User;
 import com.service.UserService;
 import com.utils.Constants;
-import com.utils.MD5Util;
 import com.utils.StringUtil;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -63,7 +62,7 @@ public class AccessController {
             model.addAttribute("message", msg);
             return "login";
         }
-        password = MD5Util.string2MD5(password).toUpperCase();
+        password = StringUtil.encodeByMD5(password);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         if (null != rememberMe) {
             token.setRememberMe(rememberMe);
@@ -76,11 +75,9 @@ public class AccessController {
                 Session session = subject.getSession();
                 session.setAttribute("user",user);
                 session.setAttribute("username",user.getUsername());
-                //记录登陆日志
-                String detail = user.getUsername() + " Login - PC";
-                userService.logInfo(Constants.OK,user.getDepartmentName(),detail,Constants.OK,new Date());
                 //登陆成功,跳转首页
-                return "redirect:/notepad/findNotepad";
+                // TODO: 2017/1/9 修改 
+                return "redirect:/loginSuccess";
             } else {//失败跳转登录页
                 return "redirect:/login";
             }
@@ -122,5 +119,10 @@ public class AccessController {
             log.error(e.getMessage());
         }
         return "redirect:/login";
+    }
+
+    @RequestMapping("/loginSuccess")
+    public String loginSuccess(){
+        return "success";
     }
 }
