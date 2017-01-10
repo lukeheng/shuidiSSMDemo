@@ -1,5 +1,0 @@
-# shuidiSSMDemo
-使用maven用来项目构建
-使用框架Springmvc+spring+mybatis
-使用shiro作为权限控制
-有问题可联系qq727232828,欢迎指正批评.
